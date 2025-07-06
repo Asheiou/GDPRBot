@@ -1,0 +1,11 @@
+name: GDPRBot
+version: '1.0-SNAPSHOT'
+main: cymru.asheiou.gdprbot.GDPRBot
+api-version: '1.21'
+commands:
+  gdpr:
+    usage: /<command> <copy/delete> <username>
+    permission: gdprbot.use
+permissions:
+  gdprbot.use:
+    default: op
