@@ -8,11 +8,8 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.plugin.java.JavaPlugin
-import xyz.aeolia.lib.manager.UserMapManager
-import xyz.aeolia.lib.sender.MessageSender
-import xyz.aeolia.lib.utils.Message
 import java.io.File
-import java.util.UUID
+import java.util.*
 
 class GDPRCommand(val plugin: JavaPlugin) : CommandExecutor {
   override fun onCommand(
@@ -22,11 +19,11 @@ class GDPRCommand(val plugin: JavaPlugin) : CommandExecutor {
     args: Array<out String>
   ): Boolean {
     if (args.size != 2) {
-      MessageSender.sendMessage(sender, Message.Generic.COMMAND_USAGE)
+      MessageSender.sendMessage(sender, COMMAND_USAGE)
       return false
     }
     val uuid = UserMapManager.getUuidFromName(args[1]) ?: run {
-      MessageSender.sendMessage(sender, Message.Player.NOT_FOUND)
+      MessageSender.sendMessage(sender, NOT_FOUND)
       return true
     }
     val scope = CoroutineScope(Dispatchers.Default)
@@ -63,10 +60,16 @@ class GDPRCommand(val plugin: JavaPlugin) : CommandExecutor {
         }
       }
       else -> {
-        MessageSender.sendMessage(sender, Message.Generic.COMMAND_USAGE)
+        MessageSender.sendMessage(sender, COMMAND_USAGE)
         return false
       }
     }
     return true
   }
+
+  companion object {
+    const val COMMAND_USAGE = "Unrecognised usage. Usage: "
+    const val NOT_FOUND = "Player not found."
+  }
 }
+

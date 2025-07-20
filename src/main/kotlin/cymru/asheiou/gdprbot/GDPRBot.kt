@@ -6,6 +6,7 @@ class GDPRBot : JavaPlugin() {
 
   override fun onEnable() {
     getCommand("gdpr")?.setExecutor(GDPRCommand(this))
+    UserMapManager.init(this)
     logger.info("GDPRBot enabled")
   }
 
