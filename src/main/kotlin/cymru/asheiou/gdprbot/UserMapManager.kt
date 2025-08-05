@@ -19,20 +19,20 @@ class UserMapManager {
   companion object {
     lateinit var plugin: JavaPlugin
     var isStandalone: Boolean = false
-
-    val filePath = "${plugin.dataFolder}${File.separator}users.json"
+    lateinit var filePath: String
     var userMap = HashMap<String, String>()
     val gson = Gson()
 
     fun init(plugin: JavaPlugin) {
       this.plugin = plugin
+      filePath = "${Companion.plugin.dataFolder}${File.separator}users.json"
 
       if(!Bukkit.getPluginManager().isPluginEnabled("AeoliaLib")) {
         plugin.logger.info("AeolaLib not found! Running standalone...")
         isStandalone = true
       }
 
-      val file: File = File(filePath)
+      val file = File(filePath)
 
       if (file.exists()) {
         try {
